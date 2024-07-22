@@ -566,42 +566,31 @@
         </div>
 
       </div>
-      <div id="modal-contact" class="modal-box modal-cart" style="display: none;">
+      <div id="modal-contact" class="modal-box" style="display: none;">
         <div class="container">
-          <div class="row">
-            <h2 class="col-sm-12">Замовити. Відправте контакті дані, і ми з вами звяжемся</h2>
-          </div>
+          <!--<div class="row">
+            <h2 class="col-sm-12">Замовити.</h2>
+            <h4>Відправте контактні дані, і ми з вами зв'яжемося</h4>
+          </div>-->
 
           <div class="row product-cart-list">
-            <div class="item col-sm-12">
-              <div class="info-box">
-
-
-                <form action="#" class="contacts-form">
+            <div class="col-md-6 col-lg-7">
+                <form action="#" class="contacts-form" id="orderForm">
                   <div class="form-group">
-                    <input type="text" placeholder="Ваше Ім'я">
+                    <input type="text" id="name"  placeholder="Ваше Ім'я">
                   </div>
                   <div class="form-group">
-                    <input type="tel" placeholder="Телефон *">
+                    <input type="tel" id="tel" placeholder="Телефон *">
                   </div>
                   <div class="form-group">
-                    <textarea name="text" id="text"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <button class="btn-custom">Відправити</button>
+                    <button class="btn-custom btn-select-size">Замовити</button>
                   </div>
                 </form>
 
-              </div>
+
             </div>
           </div>
         </div>
-
-
-        <div class="bootom-nav">
-          <a href="#" class="btn-custom btn-select-size">Оформити дзвінок</a>
-        </div>
-
       </div>
       <!------------>
       <!-- /modal -->
@@ -615,7 +604,30 @@
     <script src="js/jquery.fancybox.min.js"></script>
     <script src="js/main.js"></script>
 
-   <?php echo "TEST" ?>
+    <script>
+      $(document).ready(function() {
+        $('#orderForm').on('submit', function(event) {
+          console.log("Send request order")
+          event.preventDefault();
+          const formData = {
+            name: $('#name').val(),
+            tel: $('#tel').val()
+          };
+          $.ajax({
+            type: 'POST',
+            url: '/send-email',
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            success: function(response) {
+              alert('Email sent successfully!');
+            },
+            error: function(error) {
+              alert('Error sending email: ' + error.responseText);
+            }
+          });
+        });
+      });
+    </script>
 
   </body>
 </html>
