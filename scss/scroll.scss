@@ -1,0 +1,40 @@
+$mainColor: #F6DA73;
+$greenColor: #948F47;
+
+@mixin scroll($thumb: $greenColor, $track: rgba($greenColor, .3), $width: 6px) {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: $thumb $track;
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+  &::-webkit-scrollbar-track {
+    background: $track;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $thumb;
+  }
+}
+
+.scroll-demo {
+  padding: 10px 0;
+  width: 435px;
+  background: #fff;
+  max-height: 430px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: $mainColor rgba($mainColor, .2);
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba($mainColor, .3);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $mainColor;
+  }
+}

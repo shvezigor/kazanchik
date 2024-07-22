@@ -1,0 +1,23 @@
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}  
+}
+
+// input { @include placeholder {
+//   color: red !important;
+// }}
+
+@mixin transition {
+  transition: all .3s cubic-bezier(.25, .1, .25, 1);
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+ 
