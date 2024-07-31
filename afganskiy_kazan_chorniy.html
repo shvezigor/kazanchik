@@ -641,7 +641,8 @@
             data: JSON.stringify(formData),
             contentType: 'application/json',
             success: function(response) {
-              alert('Email sent successfully!');
+              //alert('Email sent successfully!');
+              $('#orderForm').hidden();
             },
             error: function(error) {
               alert('Error sending email: ' + error.responseText);
