@@ -656,8 +656,8 @@
           const item = 'Афганський Казан з кришкою Чорний, Rashko Baba';
           if (name !== '' && tel !== ''){
             const formData = {
-              name: $('#name').val(),
-              tel: $('#tel').val(),
+              name: name,
+              tel: tel,
               item: item
             };
             $.ajax({
@@ -686,8 +686,8 @@
 
           if (name !== '' && tel !== ''){
             const formData = {
-              name: $('#name').val(),
-              tel: $('#tel').val(),
+              name: name,
+              tel: tel,
               messages: messages
             };
             $.ajax({
