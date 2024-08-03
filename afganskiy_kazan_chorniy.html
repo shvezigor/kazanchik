@@ -416,9 +416,6 @@
           </div>
         </div>
 
-
-
-
       </main>
 
       <footer class="footer">
@@ -564,8 +561,6 @@
           <a href="#" class="btn-custom btn-select-size inverse">Продовжити покупки</a>
           <a href="#" class="btn-custom btn-select-size">Оформити замовлення</a>
         </div>
-
-
         <div class="buy-together container">
           <div class="row">
             <div class="col-12">
@@ -590,11 +585,6 @@
       </div>
       <div id="modal-contact" class="modal-box" style="display: none;">
         <div class="container">
-          <!--<div class="row">
-            <h2 class="col-sm-12">Замовити.</h2>
-            <h4>Відправте контактні дані, і ми з вами зв'яжемося</h4>
-          </div>-->
-
           <div class="row product-cart-list">
             <div class="col-md-6 col-lg-7">
                 <form action="#" class="contacts-form" id="orderForm">
@@ -608,8 +598,6 @@
                     <button class="btn-custom btn-select-size">Замовити</button>
                   </div>
                 </form>
-
-
             </div>
           </div>
         </div>
@@ -620,6 +608,8 @@
       
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/swiper-bundle.min.js"></script>
@@ -628,26 +618,39 @@
 
     <script>
       $(document).ready(function() {
+        $('#name').val('');
+        $('#tel').val('');
+
         $('#orderForm').on('submit', function(event) {
           console.log("Send request order")
           event.preventDefault();
-          const formData = {
-            name: $('#name').val(),
-            tel: $('#tel').val()
-          };
-          $.ajax({
-            type: 'POST',
-            url: 'https://back.kazanchik.com/api/send-telegram',
-            data: JSON.stringify(formData),
-            contentType: 'application/json',
-            success: function(response) {
-              //alert('Email sent successfully!');
-              $('#orderForm').hidden();
-            },
-            error: function(error) {
-              alert('Error sending email: ' + error.responseText);
-            }
-          });
+          const name = $('#name').val();
+          const tel = $('#tel').val();
+          if (name !== '' && tel !== ''){
+            const formData = {
+              name: $('#name').val(),
+              tel: $('#tel').val()
+            };
+            $.ajax({
+              type: 'POST',
+              url: 'https://back.kazanchik.com/api/send-telegram',
+              data: JSON.stringify(formData),
+              contentType: 'application/json',
+              success: function(response) {
+                $('.fancybox-button.fancybox-close-small').trigger('click');
+                toastr.success('Запит на замовлення відправлено, з вами звяжуться протягом декількох хивлин. Дякуємо!');
+
+                $('#modal-contact').css("display:none");
+                //$('.fancybox-container').css("display:none");
+              },
+              error: function(error) {
+                toastr.error('Помилка відправки повідомлення, спробуйте ще раз. ');
+              }
+            });
+          }else{
+            toastr.error('Заповніть всі поля.');
+          }
+
         });
       });
     </script>
