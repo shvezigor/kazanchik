@@ -190,15 +190,15 @@
               </ul>
             </div>
             <div class="col-md-6 col-lg-7">
-              <form action="#" class="contacts-form">
+              <form action="#" class="contacts-form" id="contactForm">
                 <div class="form-group">
-                  <input type="text" placeholder="Ваше Ім'я">
+                  <input id="contact_name" type="text" placeholder="Ваше Ім'я">
                 </div>
                 <div class="form-group">
-                  <input type="tel" placeholder="Телефон *">
+                  <input id="contact_tel" type="tel" placeholder="Телефон *">
                 </div>
                 <div class="form-group">
-                  <textarea name="text" id="text"></textarea>
+                  <textarea id="contact_messages" name="text" id="text"></textarea>
                 </div>
                 <div class="form-group">
                   <button class="btn-custom">Відправити</button>
@@ -261,7 +261,7 @@
       </footer>
       
     </div>
-    <script src="js/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/swiper-bundle.min.js"></script>

@@ -36,6 +36,7 @@
     </iframe>
   </noscript>
   <!-- End Google Tag Manager (noscript) -->
+  <div class="toast-container" id="toast-container"></div>
     <div class="wrapper">
 
       <header class="header">
@@ -245,15 +246,15 @@
               </ul>
             </div>
             <div class="col-md-6 col-lg-7">
-              <form action="#" class="contacts-form">
+              <form action="#" class="contacts-form" id="contactForm">
                 <div class="form-group">
-                  <input type="text" placeholder="Ваше Ім'я">
+                  <input id="contact_name" type="text" placeholder="Ваше Ім'я">
                 </div>
                 <div class="form-group">
-                  <input type="tel" placeholder="Телефон *">
+                  <input id="contact_tel" type="tel" placeholder="Телефон *">
                 </div>
                 <div class="form-group">
-                  <textarea name="text" id="text"></textarea>
+                  <textarea id="contact_messages" name="text" id="text"></textarea>
                 </div>
                 <div class="form-group">
                   <button class="btn-custom">Відправити</button>
@@ -316,12 +317,77 @@
       </footer>
       
     </div>
-    <script src="js/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/swiper-bundle.min.js"></script>
     <script src="js/jquery.fancybox.min.js"></script>
     <script src="js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      function showToast(message) {
+        console.log("showToast 22")
+        // Створення елемента тосту
+        const toast = document.createElement('div');
+        toast.classList.add('toast');
+        toast.innerHTML = `
+                <span>${message}</span>
+                <span class="close" onclick="closeToast(this)">&times;</span>
+            `;
 
+        // Додавання тосту до контейнера
+        const container = document.getElementById('toast-container');
+        container.appendChild(toast);
+
+        // Показати тост
+        setTimeout(() => {
+          toast.classList.add('show');
+        }, 100);
+
+        // Автоматичне закриття тосту через 3 секунди
+        setTimeout(() => {
+          closeToast(toast);
+        }, 3000);
+      }
+      function closeToast(toastElement) {
+        toastElement.classList.remove('show');
+        setTimeout(() => {
+          toastElement.remove();
+        }, 500); // Відповідає тривалості анімації зникнення
+      }
+
+      $('#contactForm').on('submit', function(event) {
+        event.preventDefault();
+        const name = $('#contact_name').val();
+        const tel = $('#contact_tel').val();
+        const messages = $('#contact_messages').val();
+
+        if (name !== '' && tel !== ''){
+          const formData = {
+            name: name,
+            tel: tel,
+            messages: messages
+          };
+          $.ajax({
+            type: 'POST',
+            url: 'https://back.kazanchik.com/api/send-telegram-contact',
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            success: function(response) {
+              showToast('Ваше повідомлення успішно відправлено!');
+              $('#contact_name').val('');
+              $('#contact_tel').val('');
+              $('#contact_messages').val('');
+            },
+            error: function(error) {
+              showToast('Помилка відправки повідомлення, спробуйте ще раз. ');
+            }
+          });
+        }else{
+          showToast('Заповніть всі поля.');
+        }
+      });
+    });
+  </script>
   </body>
 </html>
