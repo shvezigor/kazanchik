@@ -443,15 +443,15 @@
               </ul>
             </div>
             <div class="col-md-6 col-lg-7">
-              <form action="#" class="contacts-form">
+              <form action="#" class="contacts-form" id="contactForm">
                 <div class="form-group">
-                  <input type="text" placeholder="Ваше Ім'я">
+                  <input id="contact_name" type="text" placeholder="Ваше Ім'я">
                 </div>
                 <div class="form-group">
-                  <input type="tel" placeholder="Телефон *">
+                  <input id="contact_tel" type="tel" placeholder="Телефон *">
                 </div>
                 <div class="form-group">
-                  <textarea name="text" id="text"></textarea>
+                  <textarea id="contact_messages" name="text" id="text"></textarea>
                 </div>
                 <div class="form-group">
                   <button class="btn-custom">Відправити</button>
@@ -676,7 +676,36 @@
           }else{
             showToast('Заповніть всі поля.');
           }
+        });
 
+        $('#contactForm').on('submit', function(event) {
+          event.preventDefault();
+          const name = $('#contact_name').val();
+          const tel = $('#contact_tel').val();
+          const messages = $('#contact_messages').val();
+
+          if (name !== '' && tel !== ''){
+            const formData = {
+              name: $('#name').val(),
+              tel: $('#tel').val(),
+              messages: messages
+            };
+            $.ajax({
+              type: 'POST',
+              url: 'https://back.kazanchik.com/api/send-telegram-contact',
+              data: JSON.stringify(formData),
+              contentType: 'application/json',
+              success: function(response) {
+                $('.fancybox-button.fancybox-close-small').trigger('click');
+                showToast('Ваше повідомлення успішно відправлено!');
+              },
+              error: function(error) {
+                showToast('Помилка відправки повідомлення, спробуйте ще раз. ');
+              }
+            });
+          }else{
+            showToast('Заповніть всі поля.');
+          }
         });
       });
     </script>
