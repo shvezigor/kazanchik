@@ -647,7 +647,6 @@
           }, 500); // Відповідає тривалості анімації зникнення
         }
 
-
         $('#orderForm').on('submit', function(event) {
           console.log("Send request order")
           event.preventDefault();
@@ -696,8 +695,10 @@
               data: JSON.stringify(formData),
               contentType: 'application/json',
               success: function(response) {
-                $('.fancybox-button.fancybox-close-small').trigger('click');
                 showToast('Ваше повідомлення успішно відправлено!');
+                $('#contact_name').val('');
+                $('#contact_tel').val('');
+                $('#contact_messages').val('');
               },
               error: function(error) {
                 showToast('Помилка відправки повідомлення, спробуйте ще раз. ');
