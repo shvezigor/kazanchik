@@ -78,7 +78,7 @@ $(document).ready(function() {
     },
   });
 
-  $("header .navbar-nav a, .scroll-btn").mPageScroll2id({});
+//  $("header .navbar-nav a, .scroll-btn").mPageScroll2id({});
 
   //qty
 
@@ -152,4 +152,5 @@ $(window).on('load', function () {
         $input.change();
         return false;
       });
+
 });

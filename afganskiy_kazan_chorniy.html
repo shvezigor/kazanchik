@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/jquery.fancybox.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/toster.css">
 
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
@@ -29,6 +30,7 @@
     <!-- End Google Tag Manager -->
   </head>
   <body>
+  <div class="toast-container" id="toast-container"></div>
   <!-- Google Tag Manager (noscript) -->
   <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7S6JZKN"
@@ -37,9 +39,7 @@
   </noscript>
   <!-- End Google Tag Manager (noscript) -->
     <div class="wrapper">
-
       <header class="header">
-
         <div class="container">
           <div class="row">
             <div class="brand-img col">
@@ -93,11 +93,8 @@
 
           </div>
         </div>
-
       </header>
-
       <main>
-
         <section class="product-card">
           <div class="container">
             <div class="row">
@@ -386,7 +383,6 @@
             </div>
           </div>
         </section>
-
         <div class="buy-together container">
           <div class="row">
             <div class="col-12">
@@ -407,7 +403,6 @@
             </div>
           </div>
         </div>
-
         <div class="container">
           <div class="row">
             <div class="col-12 go-home text-center mt-4">
@@ -415,7 +410,6 @@
             </div>
           </div>
         </div>
-
       </main>
 
       <footer class="footer">
@@ -607,8 +601,8 @@
       <!------------>
       
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -621,15 +615,50 @@
         $('#name').val('');
         $('#tel').val('');
 
+        function showToast(message) {
+          console.log("showToast 22")
+          // Створення елемента тосту
+          const toast = document.createElement('div');
+          toast.classList.add('toast');
+          toast.innerHTML = `
+                <span>${message}</span>
+                <span class="close" onclick="closeToast(this)">&times;</span>
+            `;
+
+          // Додавання тосту до контейнера
+          const container = document.getElementById('toast-container');
+          container.appendChild(toast);
+
+          // Показати тост
+          setTimeout(() => {
+            toast.classList.add('show');
+          }, 100);
+
+          // Автоматичне закриття тосту через 3 секунди
+          setTimeout(() => {
+            closeToast(toast);
+          }, 3000);
+        }
+
+        function closeToast(toastElement) {
+          toastElement.classList.remove('show');
+          setTimeout(() => {
+            toastElement.remove();
+          }, 500); // Відповідає тривалості анімації зникнення
+        }
+
+
         $('#orderForm').on('submit', function(event) {
           console.log("Send request order")
           event.preventDefault();
           const name = $('#name').val();
           const tel = $('#tel').val();
+          const item = 'Афганський Казан з кришкою Чорний, Rashko Baba';
           if (name !== '' && tel !== ''){
             const formData = {
               name: $('#name').val(),
-              tel: $('#tel').val()
+              tel: $('#tel').val(),
+              item: item
             };
             $.ajax({
               type: 'POST',
@@ -638,17 +667,14 @@
               contentType: 'application/json',
               success: function(response) {
                 $('.fancybox-button.fancybox-close-small').trigger('click');
-                toastr.success('Запит на замовлення відправлено, з вами звяжуться протягом декількох хивлин. Дякуємо!');
-
-                $('#modal-contact').css("display:none");
-                //$('.fancybox-container').css("display:none");
+                  showToast('Ваше повідомлення успішно відправлено!');
               },
               error: function(error) {
-                toastr.error('Помилка відправки повідомлення, спробуйте ще раз. ');
+                showToast('Помилка відправки повідомлення, спробуйте ще раз. ');
               }
             });
           }else{
-            toastr.error('Заповніть всі поля.');
+            showToast('Заповніть всі поля.');
           }
 
         });
