@@ -726,11 +726,6 @@
     </div>
     <div id="modal-contact" class="modal-box" style="display: none;">
         <div class="container">
-            <!--<div class="row">
-              <h2 class="col-sm-12">Замовити.</h2>
-              <h4>Відправте контактні дані, і ми з вами зв'яжемося</h4>
-            </div>-->
-
             <div class="row product-cart-list">
                 <div class="col-md-6 col-lg-7">
                     <form action="#" class="contacts-form" id="orderForm">
@@ -738,14 +733,26 @@
                             <input type="text" id="name" placeholder="Ваше Ім'я">
                         </div>
                         <div class="form-group">
-                            <input type="tel" id="tel" placeholder="Телефон *">
+                            <!-- Ensure select has form-control class -->
+                            <select id="operator" class="form-control">
+                                <option value="" disabled selected>Виберіть оператора доставки</option>
+                                <option value="Нова Пошта">Нова Пошта</option>
+                                <option value="Укр Пошта">Укр Пошта</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <button class="btn-custom btn-select-size">Замовити</button>
+                            <input type="text" id="place" placeholder="Номер відділення">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="address" placeholder="Адреса доставки">
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="tel" placeholder="Телефон">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn-custom btn-select-size button-order">Замовити</button>
                         </div>
                     </form>
-
-
                 </div>
             </div>
         </div>
