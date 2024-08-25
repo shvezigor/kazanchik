@@ -530,8 +530,6 @@
                                 купити афганський казан від 5 до 80 літрів, виробництва RASHKO BABA.</p>
                         </article>
                     </div> <!-- end bottom-content-->
-
-
                 </div>
             </div>
         </section>
@@ -672,130 +670,6 @@
     <!----------->
     <!-- modal -->
     <!----------->
-    <div id="modal" class="modal-box modal-cart" style="display: none;">
-        <div class="container">
-            <div class="row">
-                <h2 class="col-sm-12">Ви успішно додали казан у кошик</h2>
-            </div>
-
-            <div class="row product-cart-list">
-                <div class="item col-sm-12">
-                    <div class="img-box"><img src="images/cont/small-1.png" alt="img"></div>
-                    <div class="info-box">
-                        <div class="left-side">
-                            <a href="#" class="title">
-                                Афганський Казан з кришкою Чорний, Rashko Baba
-                            </a>
-                            <div class="description">Казан на 5 літрів (факт. 4,7 л)</div>
-                        </div>
-                        <div class="right-side">
-                            <div class="quantity">
-                                <button class="minus" aria-label="Decrease">&minus;</button>
-                                <input type="number" class="input-box" value="1" min="1" max="10">
-                                <button class="plus" aria-label="Increase">&plus;</button>
-                            </div>
-                            <div class="price">2 750грн.</div>
-                        </div>
-                        <div class="edit-item">
-                            <a href="#" class="choose-another">Вибрати інший артикул</a>
-                            <a href="#" class="delete-item">Видалити</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="bootom-nav">
-            <a href="#" class="btn-custom btn-select-size inverse">Продовжити покупки</a>
-            <a href="#" class="btn-custom btn-select-size">Оформити замовлення</a>
-        </div>
-
-
-        <div class="buy-together container">
-            <div class="row">
-                <div class="col-12">
-                    <h5>Разом з цим товаром купують:</h5>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="inner-wrap">
-                        <div class="img-box">
-                            <div class="delivery">БЕЗКОШТОВНА ДОСТАВКА +КНИГА РЕЦЕПТІВ</div>
-                            <img src="images/cont/product-1.png" alt="img">
-                        </div>
-                        <a href="#" class="product-name">Афганський Казан Полуполірований, Rashko Baba</a>
-                        <div class="price">3 500 грн.</div>
-                        <a href="#" class="btn-custom btn-select-size">Обрати за розміром</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div id="modal" class="modal-box modal-cart" style="display: none;">
-        <div class="container">
-            <div class="row">
-                <h2 class="col-sm-12">Ви успішно додали казан у кошик</h2>
-            </div>
-
-            <div class="row product-cart-list">
-                <div class="item col-sm-12">
-                    <div class="img-box"><img src="images/cont/small-1.png" alt="img"></div>
-                    <div class="info-box">
-                        <div class="left-side">
-                            <a href="#" class="title">
-                                Афганський Казан з кришкою Чорний, Rashko Baba
-                            </a>
-                            <div class="description">Казан на 5 літрів (факт. 4,7 л)</div>
-                        </div>
-                        <div class="right-side">
-                            <div class="quantity">
-                                <button class="minus" aria-label="Decrease">&minus;</button>
-                                <input type="number" class="input-box" value="1" min="1" max="10">
-                                <button class="plus" aria-label="Increase">&plus;</button>
-                            </div>
-                            <div class="price">2 750грн.</div>
-                        </div>
-                        <div class="edit-item">
-                            <a href="#" class="choose-another">Вибрати інший артикул</a>
-                            <a href="#" class="delete-item">Видалити</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="bootom-nav">
-            <a href="#" class="btn-custom btn-select-size inverse">Продовжити покупки</a>
-            <a href="#" class="btn-custom btn-select-size">Оформити замовлення</a>
-        </div>
-        <div class="buy-together container">
-            <div class="row">
-                <div class="col-12">
-                    <h5>Разом з цим товаром купують:</h5>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="inner-wrap">
-                        <div class="img-box">
-                            <div class="delivery">БЕЗКОШТОВНА ДОСТАВКА +КНИГА РЕЦЕПТІВ</div>
-                            <img src="images/cont/product-1.png" alt="img">
-                        </div>
-                        <a href="#" class="product-name">Афганський Казан Полуполірований, Rashko Baba</a>
-                        <div class="price">3 500 грн.</div>
-                        <a href="#" class="btn-custom btn-select-size">Обрати за розміром</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
     <div id="modal-contact" class="modal-box" style="display: none;">
         <div class="container">
             <div class="row product-cart-list">
@@ -879,16 +753,23 @@
         }
 
         $('#orderForm').on('submit', function(event) {
-            console.log("Send request order")
             event.preventDefault();
             const name = $('#name').val();
             const tel = $('#tel').val();
-            const item = 'Афганський Казан Комбінований, Rashko Baba';
+            const address = $('#address').val();
+            const operator = $('#operator').val();
+            const place = $('#place').val();
+            const selectedInput = $('input[name="exampleRadios"]:checked');
+            const selectedLabel = selectedInput.next('label').text().trim();
+
             if (name !== '' && tel !== ''){
                 const formData = {
                     name: name,
                     tel: tel,
-                    item: item
+                    address: address,
+                    operator: operator,
+                    place: place,
+                    item: selectedLabel
                 };
                 $.ajax({
                     type: 'POST',

@@ -844,28 +844,33 @@
             }
         });
 
-        $('#contactForm').on('submit', function(event) {
+        $('#orderForm').on('submit', function(event) {
             event.preventDefault();
-            const name = $('#contact_name').val();
-            const tel = $('#contact_tel').val();
-            const messages = $('#contact_messages').val();
+            const name = $('#name').val();
+            const tel = $('#tel').val();
+            const address = $('#address').val();
+            const operator = $('#operator').val();
+            const place = $('#place').val();
+            const selectedInput = $('input[name="exampleRadios"]:checked');
+            const selectedLabel = selectedInput.next('label').text().trim();
 
             if (name !== '' && tel !== ''){
                 const formData = {
                     name: name,
                     tel: tel,
-                    messages: messages
+                    address: address,
+                    operator: operator,
+                    place: place,
+                    item: selectedLabel
                 };
                 $.ajax({
                     type: 'POST',
-                    url: 'https://back.kazanchik.com/api/send-telegram-contact',
+                    url: 'https://back.kazanchik.com/api/send-telegram',
                     data: JSON.stringify(formData),
                     contentType: 'application/json',
                     success: function(response) {
+                        $('.fancybox-button.fancybox-close-small').trigger('click');
                         showToast('Ваше повідомлення успішно відправлено!');
-                        $('#contact_name').val('');
-                        $('#contact_tel').val('');
-                        $('#contact_messages').val('');
                     },
                     error: function(error) {
                         showToast('Помилка відправки повідомлення, спробуйте ще раз. ');
