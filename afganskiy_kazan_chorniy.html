@@ -658,7 +658,7 @@
                   <input type="tel" id="tel" placeholder="Телефон">
                 </div>
                 <div class="form-group">
-                  <button class="btn-custom btn-select-size">Замовити</button>
+                  <button class="btn-custom btn-select-size button-order">Замовити</button>
                 </div>
               </form>
             </div>
@@ -722,6 +722,7 @@
           const name = $('#name').val();
           const tel = $('#tel').val();
           const address = $('#address').val();
+          const operator = $('#operator').val();
           const place = $('#place').val();
           const selectedInput = $('input[name="exampleRadios"]:checked');
           const selectedLabel = selectedInput.next('label').text().trim();
@@ -731,6 +732,7 @@
               name: name,
               tel: tel,
               address: address,
+              operator: operator,
               place: place,
               item: selectedLabel
             };
